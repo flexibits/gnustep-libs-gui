@@ -110,7 +110,6 @@ NSDocumentController.m \
 NSDrawer.m \
 NSEPSImageRep.m \
 NSEvent.m \
-NSFileWrapperExtensions.m \
 NSFont.m \
 NSFontAssetRequest.m \
 NSFontCollection.m \
