@@ -616,9 +616,19 @@ DPS_METHOD_3(DPSsethsbcolor, CGFloat, h, CGFloat, s, CGFloat, b)
 
 DPS_METHOD_3(DPSsetrgbcolor, CGFloat, r, CGFloat, g, CGFloat, b)
 
-DPS_METHOD_1(GSSetFillColorspace, NSDictionary *, dict)
+static inline void
+GSSetFillColorspace(GSCTXT *ctxt, NSDictionary * dict)
+{
+  (ctxt->methods->GSSetFillColorspace_)
+    (ctxt, @selector(GSSetFillColorspace:), dict);
+}
 
-DPS_METHOD_1(GSSetStrokeColorspace, NSDictionary *, dict)
+static inline void
+GSSetStrokeColorspace(GSCTXT *ctxt, NSDictionary * dict)
+{
+  (ctxt->methods->GSSetStrokeColorspace_)
+    (ctxt, @selector(GSSetStrokeColorspace:), dict);
+}
 
 DPS_METHOD_1(GSSetFillColor, CGFloat *, values)
 
@@ -645,7 +655,12 @@ DPS_METHOD_3(DPSyshow, const char*, s, const CGFloat*, numarray, int, size)
 
 DPS_METHOD_1(GSSetCharacterSpacing, CGFloat, extra)
 
-DPS_METHOD_1(GSSetFont, NSFont*, font)
+static inline void
+GSSetFont(GSCTXT *ctxt, NSFont* font)
+{
+  (ctxt->methods->GSSetFont_)
+    (ctxt, @selector(GSSetFont:), font);
+}
 
 DPS_METHOD_1(GSSetFontSize, CGFloat, size)
 
