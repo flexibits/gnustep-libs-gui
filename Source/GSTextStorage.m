@@ -345,11 +345,11 @@ static SEL oatSel;
 static SEL remSel;
 
 static IMP	infImp;
-static void	(*addImp)();
-static unsigned (*cntImp)();
-static void	(*insImp)();
+static void	(*addImp)(id, SEL, id);
+static NSUInteger (*cntImp)(id, SEL);
+static void	(*insImp)(id, SEL, id, NSUInteger);
 static IMP	oatImp;
-static void	(*remImp)();
+static void	(*remImp)(id, SEL, NSUInteger);
 
 #define	NEWINFO(Z,O,L)	((*infImp)(infCls, infSel, (Z), (O), (L)))
 #define	ADDOBJECT(O)	((*addImp)(_infoArray, addSel, (O)))
@@ -384,11 +384,11 @@ static void _setup()
 
       a = [NSMutableArray allocWithZone: NSDefaultMallocZone()];
       a = [a initWithCapacity: 1];
-      addImp = (void (*)())[a methodForSelector: addSel];
-      cntImp = (unsigned (*)())[a methodForSelector: cntSel];
-      insImp = (void (*)())[a methodForSelector: insSel];
+      addImp = (void (*)(id, SEL, id))[a methodForSelector: addSel];
+      cntImp = (NSUInteger (*)(id, SEL))[a methodForSelector: cntSel];
+      insImp = (void (*)(id, SEL, id, NSUInteger))[a methodForSelector: insSel];
       oatImp = [a methodForSelector: oatSel];
-      remImp = (void (*)())[a methodForSelector: remSel];
+      remImp = (void (*)(id, SEL, NSUInteger))[a methodForSelector: remSel];
       RELEASE(a);
 
       d = [NSDictionary new];
